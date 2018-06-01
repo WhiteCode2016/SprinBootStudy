@@ -1,0 +1,6 @@
+rootProject.name = 'SprinBootStudy'
+include 'white-common'
+include 'white-web'
+include 'white-api'
+include 'white-impl'
+

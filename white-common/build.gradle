@@ -1,0 +1,13 @@
+ext {
+    commonslang = '3.4'
+    jacksonCore = '2.9.5'
+    jacksonAnnotation = '2.9.0'
+    jacksonDataBind = '2.9.5'
+}
+
+dependencies {
+    compile("org.apache.commons:commons-lang3:$commonslang")
+    compile("com.fasterxml.jackson.core:jackson-core:$jacksonCore")
+    compile("com.fasterxml.jackson.core:jackson-annotations:$jacksonAnnotation")
+    compile("com.fasterxml.jackson.core:jackson-databind:$jacksonDataBind")
+}
