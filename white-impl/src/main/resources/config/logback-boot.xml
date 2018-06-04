@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+    
+	<!-- 尽量别用绝对路径，如果带参数不同容器路径解释可能不同 -->
+	<property name="LOG_HOME" value="${user.home}/logs/"/>
+	<!-- 文件输出格式 -->  
+    <property name="PATTERN" value="%-12(%d{yyyy-MM-dd HH:mm:ss.SSS}) |-%-5level [%thread] %c [%L] -| %msg %n" /> 
+
+	<!-- 控制台设置 -->
+	<appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+		<!-- encoder 默认配置为PatternLayoutEncoder -->
+		<encoder>
+			<Pattern>.%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg %n
+			</Pattern>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>TRACE</level>
+		</filter>
+	</appender>
+
+	<!-- 0:12:51.012 [qtp231719230-45] DEBUG o.c.d.r.util.LoggingResponseFilter 
+		%d{HH:mm:ss.SSS}——日志输出时间 %thread——输出日志的进程名字，这在Web应用以及异步任务处理中很有用 %-5level——日志级别，并且使用5个字符靠左对齐 
+		%logger{36}——日志输出者的名字 %msg——日志消息 %n——平台的换行符 -->
+	<!-- 日志输出到文件 -->
+	<appender name="dailyRollingFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!-- <File>aaa.log</File> -->
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<FileNamePattern>${LOG_HOME}/clt-common.%d{yyyy-MM-dd}.log</FileNamePattern>
+			<!-- 表示只保留最近30天的日志 -->
+			<maxHistory>60</maxHistory>
+		</rollingPolicy>
+		<!-- encoders are assigned the type 
+       			ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+		<encoder>
+			<Pattern>${PATTERN}</Pattern>
+		</encoder>
+	</appender>
+	
+	<!-- 测试环境+开发环境. 多个使用逗号隔开. -->
+	<springProfile name="dev,test">
+		<root level="ERROR">
+			<appender-ref ref="dailyRollingFileAppender" />  
+			<appender-ref ref="consoleAppender" />
+		</root>
+		<!-- <root level="DEBUG">
+			<appender-ref ref="dailyRollingFileAppender" />
+			<appender-ref ref="consoleAppender" />
+		</root> -->
+	</springProfile>
+
+
+	<!-- 生产环境. -->
+	<springProfile name="prod">
+		<logger name="org.springframework" level="ERROR" />
+		<!-- 全局日志设置 -->
+		<root level="ERROR">
+		  <appender-ref ref="dailyRollingFileAppender"/>
+		</root>
+	</springProfile>
+
+</configuration>

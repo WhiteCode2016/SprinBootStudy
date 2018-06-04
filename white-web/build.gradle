@@ -1,7 +1,14 @@
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
+ext {
+    swagger2Version = '2.8.0'
+}
+
 dependencies {
     compile project(':white-common')
-    compile('org.springframework.boot:spring-boot-starter-web')
+    compile("org.springframework.boot:spring-boot-starter-web")
+    // Swagger2 RESTFUL API文档
+    compile("io.springfox:springfox-swagger2:$swagger2Version")
+    compile("io.springfox:springfox-swagger-ui:$swagger2Version")
 }

@@ -1,7 +1,7 @@
 package com.white;
 
-import com.white.domain.repository.UserRepository;
-import com.white.entity.User;
+import com.white.dto.UserDTO;
+import com.white.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -9,6 +9,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.Date;
 
 /**
  * 接口测试
@@ -19,17 +20,17 @@ import javax.annotation.Resource;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class WhiteImplApplicationTests {
+
     @Resource
-    UserRepository userRepository;
+    UserService userService;
 
     @Test
-    @Transactional
-    public void userRepositoryTest() {
-//        userRepository.findById((long) 1);
-        User user = new User();
+//    @Transactional
+    public void userServiceTest() {
+        UserDTO user = new UserDTO();
         user.setUserCode("USER_TEST");
         user.setUserNameCn("王二小");
-        userRepository.save(user);
-        throw new RuntimeException("测试事务");
+        user.setBirth(new Date());
+        userService.saveUser(user);
     }
 }
