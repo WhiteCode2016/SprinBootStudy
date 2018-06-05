@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
+<!--<head th:include="layout/layout :: htmlhead" th:with="title='主页'">
+    <link th:href="@{test.css}" rel="stylesheet" type="text/css">
+</head>-->
+<head>
+    <title>主页</title>
+    <link th:href="@{test/test.css}" rel="stylesheet" type="text/css">
+    <script th:src="@{Metronic-4.1.0/theme/assets/global/scripts/datatable.js}" type="text/javascript"></script>
+    <script th:src="@{test/test.js}" type="text/javascript"></script>
+</head>
+<body>
+<div class="page-content" layout:fragment="content">
+    <div class="container">
+        <ul class="page-breadcrumb breadcrumb">
+            <li>
+                <a href="#">Home</a><i class="fa fa-circle"></i>
+            </li>
+            <li class="active">
+                Dashboard
+            </li>
+        </ul>
+
+        <div class="row">
+            Hello, World!
+        </div>
+    </div>
+</div>
+
+
+<script layout:fragment="innerscript">
+    $(function () {
+        console.log("Hello, World!");
+    });
+</script>
+
+</body>
+</html>
