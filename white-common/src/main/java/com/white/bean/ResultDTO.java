@@ -1,4 +1,4 @@
-package com.white.pagination;
+package com.white.bean;
 
 import java.io.Serializable;
 

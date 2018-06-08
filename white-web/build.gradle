@@ -8,6 +8,8 @@ ext {
 
 dependencies {
     compile project(':white-common')
+    compile project(':white-api')
+    compile project(':white-impl')
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-devtools")
     // Swagger2 RESTFUL API文档

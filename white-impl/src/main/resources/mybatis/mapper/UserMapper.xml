@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.white.domain.mapper.UserMapper">
+    <resultMap id="userResultMap" type="com.white.dto.UserDTO">
+        <result column="USER_ID" property="userId"/>
+        <result column="USER_CODE" property="userCode"/>
+        <result column="USER_NAME_CN" property="userNameCn"/>
+        <result column="USER_NAME_EN" property="userNamEn"/>
+        <result column="PASSWORD" property="password"/>
+        <result column="BIRTH" property="birth"/>
+        <result column="EMAIL" property="email"/>
+        <result column="ADDRESS" property="address"/>
+        <result column="PHONE" property="phone"/>
+    </resultMap>
+
+    <!-- 查询所有用户 -->
+    <select id="queryUsers" resultMap="userResultMap">
+        SELECT * FROM T_USER
+    </select>
+
+</mapper>
