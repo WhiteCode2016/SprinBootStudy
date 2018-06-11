@@ -3,6 +3,7 @@ package com.white.service;
 import com.white.bean.pagination.OrderablePaginationDTO;
 import com.white.bean.pagination.PaginationResultDTO;
 import com.white.dto.UserDTO;
+import com.white.dto.UserQueryDTO;
 
 import java.util.List;
 
@@ -16,4 +17,5 @@ public interface UserService {
     void saveUser(UserDTO userDTO);
 
     PaginationResultDTO<UserDTO> queryUsers(OrderablePaginationDTO op);
+    List<UserDTO> queryUsersByCondition(UserQueryDTO queryDTO);
 }

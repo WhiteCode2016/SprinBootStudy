@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
+<!--<head th:include="layout/layout :: htmlhead" th:with="title='主页'">
+    <link th:href="@{test.css}" rel="stylesheet" type="text/css">
+</head>-->
+<head>
+    <title>DataTables测试</title>
+</head>
+<body>
+<div class="page-content" layout:fragment="content">
+    <div class="container">
+        <ul class="page-breadcrumb breadcrumb">
+            <li>
+                <a href="#">Home</a><i class="fa fa-circle"></i>
+            </li>
+            <li class="active">
+                Dashboard
+            </li>
+        </ul>
+
+        <div class="row">
+            <table id="dataTable" class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <!--<th><input type="checkbox" name="allChecked" /></th>-->
+                    <th>编号</th>
+                    <th>用户名</th>
+                    <th>中文名</th>
+                    <th>出生日期</th>
+                </tr>
+                </thead>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+
+<script layout:fragment="innerscript">
+    $( function () {
+        console.log("hello,world");
+        // $('#table_id_example').DataTable();
+        var table = $('#dataTable').DataTable({
+            "paging" : true,  //是否开启本地分页
+            "lengthChange" : true, //是否允许用户改变表格每页显示的记录数
+            "searching" : true, //是否允许Datatables开启本地搜索
+            "processing" : true, //是否显示处理状态
+            "deferRender" : true, //控制Datatables的延迟渲染，可以提高初始化的速度
+            "serverSide": true,
+            "ajax" : {
+                "url" : "/user/listByPage",
+                "type" : "POST"
+            },
+            "columns" : [
+                {"data" : "userId"},
+                {"data" : "userNameCn"},
+                {"data" : "userNameEn"},
+                {"data" : "birth"}
+            ]
+        });
+    } );
+</script>
+
+</body>
+</html>

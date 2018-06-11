@@ -6,6 +6,7 @@ import com.white.bean.pagination.PaginationResultDTO;
 import com.white.domain.mapper.UserMapper;
 import com.white.domain.repository.UserRepository;
 import com.white.dto.UserDTO;
+import com.white.dto.UserQueryDTO;
 import com.white.entity.User;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -43,5 +44,10 @@ public class UserServiceImpl extends AbstractServiceImpl implements UserService{
             }
         });
         return new PaginationResultDTO<>(op,list);
+    }
+
+    @Override
+    public List<UserDTO> queryUsersByCondition(UserQueryDTO queryDTO) {
+        return userMapper.queryUsers();
     }
 }
