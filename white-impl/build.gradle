@@ -16,7 +16,7 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
     compile("org.mybatis.spring.boot:mybatis-spring-boot-starter:$mybatisVersion")
     compile("com.github.pagehelper:pagehelper-spring-boot-starter:$pageHelperVersion")
-    compile("com.alibaba.spring.boot:dubbo-spring-boot-starter:$dubboVersion")
+//    compile("com.alibaba.spring.boot:dubbo-spring-boot-starter:$dubboVersion")
 //    compile("com.alibaba:druid:$driudVersion")
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }

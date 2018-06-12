@@ -1,6 +1,7 @@
 package com.white.entity;
 
 import com.white.common.WhiteConstants;
+import com.white.enums.CommonEnums;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -18,22 +19,35 @@ public class User extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "USER_ID")
     private Long userId;
-    @Column(name = "USER_CODE")
+    /**用户代码*/
+    @Column(name = "USER_CODE", length = 20)
     private String userCode;
-    @Column(name = "USER_NAME_CN")
+    /**用户中文名*/
+    @Column(name = "USER_NAME_CN", length = 200)
     private String userNameCn;
-    @Column(name = "USER_NAME_EN")
+    /**用户英文名*/
+    @Column(name = "USER_NAME_EN", length = 200)
     private String userNameEn;
-    @Column(name = "PASSWORD")
+    /**密码*/
+    @Column(name = "PASSWORD", length = 300)
     private String password;
+    /**出生日期*/
     @Column(name = "BIRTH")
+    @Temporal(TemporalType.DATE)
     private Date birth;
-    @Column(name = "EMAIL")
+    /**邮箱*/
+    @Column(name = "EMAIL", length = 100)
     private String email;
-    @Column(name = "ADDRESS")
+    /**地址*/
+    @Column(name = "ADDRESS", length = 500)
     private String address;
-    @Column(name = "PHONE")
+    /**联系方式*/
+    @Column(name = "PHONE", length = 20)
     private String phone;
+    /**锁定状态*/
+    @Column(name = "LOCKED")
+    @Enumerated(EnumType.STRING)
+    private CommonEnums.IF locked;
 
     public Long getUserId() {
         return userId;
@@ -107,4 +121,11 @@ public class User extends BaseEntity {
         this.phone = phone;
     }
 
+    public CommonEnums.IF getLocked() {
+        return locked;
+    }
+
+    public void setLocked(CommonEnums.IF locked) {
+        this.locked = locked;
+    }
 }

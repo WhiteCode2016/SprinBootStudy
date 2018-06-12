@@ -1,5 +1,6 @@
 ext {
     servletVersion = '3.1.0'
+    springContextVserion = '4.3.2.RELEASE'
     commonslang = '3.4'
     jacksonCore = '2.9.5'
     jacksonAnnotation = '2.9.0'
@@ -9,7 +10,7 @@ ext {
 dependencies {
     // https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api
     compile("javax.servlet:javax.servlet-api:$servletVersion")
-
+    compile ("org.springframework:spring-context:$springContextVersion")
     compile("org.apache.commons:commons-lang3:$commonslang")
     compile("com.fasterxml.jackson.core:jackson-core:$jacksonCore")
     compile("com.fasterxml.jackson.core:jackson-annotations:$jacksonAnnotation")

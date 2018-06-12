@@ -16,6 +16,6 @@ import java.util.List;
 public interface UserService {
     void saveUser(UserDTO userDTO);
 
-    PaginationResultDTO<UserDTO> queryUsers(OrderablePaginationDTO op);
-    List<UserDTO> queryUsersByCondition(UserQueryDTO queryDTO);
+    List<UserDTO> queryUsers(UserQueryDTO queryDTO);
+    PaginationResultDTO<UserDTO> queryUsersByCondition(UserQueryDTO queryDTO, OrderablePaginationDTO op);
 }

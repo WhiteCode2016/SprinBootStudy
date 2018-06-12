@@ -288,4 +288,15 @@ public class DataTableDTO<T> {
         this.page_size = page_size;
     }
 
+    public static <T> DataTableDTO<T> assemable(PaginationResultDTO<T> paginationResultDTO) {
+        DataTableDTO<T> result = new DataTableDTO<>();
+        if (paginationResultDTO.getResult() != null) {
+            result.setData(paginationResultDTO.getResult());
+        }
+        result.setStart(paginationResultDTO.getPage());
+        result.setLength(paginationResultDTO.getSize());
+        result.setRecordsTotal(paginationResultDTO.getTotalCount());
+        result.setRecordsFiltered(paginationResultDTO.getTotalCount());
+        return result;
+    }
 }

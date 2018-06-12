@@ -15,22 +15,89 @@
                 <a href="#">Home</a><i class="fa fa-circle"></i>
             </li>
             <li class="active">
-                Dashboard
+                用户管理
             </li>
         </ul>
-
         <div class="row">
-            <table id="dataTable" class="table table-bordered table-hover">
-                <thead>
-                <tr>
-                    <!--<th><input type="checkbox" name="allChecked" /></th>-->
-                    <th>编号</th>
-                    <th>用户名</th>
-                    <th>中文名</th>
-                    <th>出生日期</th>
-                </tr>
-                </thead>
-            </table>
+            <div class="col-md-12">
+                <div class="portlet box blue">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-gift">用户查询</i>
+                        </div>
+                        <div class="tools">
+                            <a href="javascript:;" class="collapse"></a>
+                        </div>
+                    </div>
+                    <div class="portlet-body form">
+                        <form class="horizontal-form" id="queryForm" th:object="${queryDTO}" method="post" th:action="@{/admin/user}">
+                            <div class="form-body">
+                                <!--<h3 class="form-section">查询条件</h3>-->
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="userCode">用户代码</label>
+                                            <input type="text" class="form-control input-sm" placeholder="用户代码"
+                                                   id="userCode" name="userCode" th:field="*{userCode}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="userName">用户名称</label>
+                                            <input type="text" class="form-control input-sm" placeholder="中文名/英文名"
+                                                   id="userName" name="userName" th:field="*{userName}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="locked">锁定状态</label>
+                                            <select class="form-control input-sm"
+                                                    id="locked" name="locked" th:field="*{locked}">
+                                                <option th:each="locked : ${lockedList}"
+                                                    th:value="${locked.value}" th:text="${locked.label}"></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <button class="btn btn-success btn-sm" id="search"><i class="fa fa-search"></i> 查询</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="portlet light">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-cogs font-green-sharp"></i>
+                            <span class="caption-subject font-green-sharp bold uppercase">查询结果</span>
+                        </div>
+                        <div class="tools">
+                            <a href="javascript:;" class="collapse" data-original-title="" title=""></a>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <table id="dataTable" class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>编号</th>
+                                    <th>用户代码</th>
+                                    <th>用户名</th>
+                                    <th>中文名</th>
+                                    <th>出生日期</th>
+                                    <th>邮件</th>
+                                    <th>地址</th>
+                                    <th>联系方式</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
 
         </div>
     </div>
@@ -39,27 +106,46 @@
 
 <script layout:fragment="innerscript">
     $( function () {
-        console.log("hello,world");
-        // $('#table_id_example').DataTable();
         var table = $('#dataTable').DataTable({
             "paging" : true,  //是否开启本地分页
-            "lengthChange" : true, //是否允许用户改变表格每页显示的记录数
-            "searching" : true, //是否允许Datatables开启本地搜索
+            "lengthChange" : false, //是否允许用户改变表格每页显示的记录数
+            "searching" : false, //是否允许Datatables开启本地搜索
             "processing" : true, //是否显示处理状态
             "deferRender" : true, //控制Datatables的延迟渲染，可以提高初始化的速度
-            "serverSide": true,
+            "serverSide" : true,
+            // "lengthMenu" : [1,2,3],
+            "pageLength" : 2,
             "ajax" : {
-                "url" : "/user/listByPage",
-                "type" : "POST"
+                "url" : "/admin/user/query.json",
+                "type" : "POST",
+                "data" : function (d) {
+                    // 获取表格分页信息
+                    var info = $('#dataTable').DataTable().page.info();
+                    d.page = info.page + 1;
+                    d.size = info.length;
+                    // 查询条件
+                    d.userCode = $("#userCode").val();
+                    d.userName = $("#userName").val();
+                    d.locked = $("#locked").val();
+                }
             },
             "columns" : [
                 {"data" : "userId"},
+                {"data" : "userCode"},
                 {"data" : "userNameCn"},
                 {"data" : "userNameEn"},
-                {"data" : "birth"}
+                {"data" : "birth"},
+                {"data" : "email"},
+                {"data" : "address"},
+                {"data" : "phone"}
             ]
         });
-    } );
+
+        // 查询操作
+        $(document).delegate('#search','click',function() {
+            table.ajax.reload();
+        });
+    });
 </script>
 
 </body>

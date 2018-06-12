@@ -1,6 +1,7 @@
 package com.white.domain.mapper;
 
 import com.white.dto.UserDTO;
+import com.white.dto.UserQueryDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
@@ -29,4 +30,5 @@ public interface UserMapper {
             @Result(column = "PHONE",property = "phone")
     })*/
     List<UserDTO> queryUsers();
+    List<UserDTO> queryUsersByCondition(UserQueryDTO queryDTO);
 }

@@ -36,18 +36,19 @@ public class UserServiceImpl extends AbstractServiceImpl implements UserService{
     }
 
     @Override
-    public PaginationResultDTO<UserDTO> queryUsers(OrderablePaginationDTO op) {
+    public List<UserDTO> queryUsers(UserQueryDTO queryDTO) {
+        return userMapper.queryUsersByCondition(queryDTO);
+    }
+
+    @Override
+    public PaginationResultDTO<UserDTO> queryUsersByCondition(UserQueryDTO queryDTO, OrderablePaginationDTO op) {
         List<UserDTO> list = executeQuery(op, new ISelect() {
             @Override
             public void doSelect() {
-                userMapper.queryUsers();
+                userMapper.queryUsersByCondition(queryDTO);
             }
         });
         return new PaginationResultDTO<>(op,list);
     }
 
-    @Override
-    public List<UserDTO> queryUsersByCondition(UserQueryDTO queryDTO) {
-        return userMapper.queryUsers();
-    }
 }
