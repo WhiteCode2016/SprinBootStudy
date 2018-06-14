@@ -6,6 +6,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.sun.javafx.binding.StringFormatter;
 import com.white.bean.LabelValueBean;
+import com.white.bean.ResultDTO;
 import com.white.bean.pagination.DataTableDTO;
 import com.white.bean.pagination.OrderDTO;
 import com.white.bean.pagination.OrderablePaginationDTO;
@@ -83,6 +84,17 @@ public class UserController extends BaseController {
         logger.info(queryDTO.getUserName());
         PaginationResultDTO paginationResultDTO = userService.queryUsersByCondition(queryDTO,orderablePaginationDTO);
         return DataTableDTO.assemable(paginationResultDTO);
+    }
+
+    @ResponseBody
+    @PostMapping("/delete")
+    public ResultDTO<String> delete(@ModelAttribute("id") Long id) {
+        try {
+            userService.deleteUser(id);
+        } catch (Exception e) {
+            return ResultDTO.reject(e.getMessage());
+        }
+        return ResultDTO.success();
     }
 
     /** 获取Enum List*/

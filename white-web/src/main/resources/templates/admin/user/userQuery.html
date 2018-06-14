@@ -88,10 +88,11 @@
                                     <th>用户代码</th>
                                     <th>用户名</th>
                                     <th>中文名</th>
-                                    <th>出生日期</th>
+                                    <th>锁定状态</th>
                                     <th>邮件</th>
                                     <th>地址</th>
                                     <th>联系方式</th>
+                                    <th>操作</th>
                                 </tr>
                             </thead>
                         </table>
@@ -134,10 +135,23 @@
                 {"data" : "userCode"},
                 {"data" : "userNameCn"},
                 {"data" : "userNameEn"},
-                {"data" : "birth"},
+                {
+                    "data" : "locked",
+                    "render" : function (data, type, full, meta) {
+                        return data == "Y" ? "是" : "否";
+                    }
+                },
                 {"data" : "email"},
                 {"data" : "address"},
-                {"data" : "phone"}
+                {"data" : "phone"},
+                {
+                    "data" : null,
+                    "render" : function (data, type, full, meta) {
+                        return '<span class="fa fa-pencil" style="cursor: pointer" title="修改" onclick="modifyUser('+full.userId+')"></span>' +
+                            '<span class="fa fa-remove" style="cursor: pointer" title="删除" onclick="deleteUser('+full.userId+')"></span>' +
+                            '<span class="fa fa-repeat" style="cursor: pointer" title="重置密码" onclick="resetPassword('+full.userId+')"></span>'
+                    }
+                }
             ]
         });
 
@@ -146,6 +160,26 @@
             table.ajax.reload();
         });
     });
+
+    function deleteUser(id) {
+        if (confirm("确认要删除？")) {
+            $.ajax({
+                type : "POST",
+                // url : /*[[@{/admin/user/delete}]]*/"",
+                url : "/admin/user/delete",
+                data : {
+                    id : id
+                },
+                success : function (reponse) {
+                    if ('failure' == reponse.status) {
+                        alert(reponse.message)
+                    } else {
+                        alert("成功")
+                    }
+                }
+            })
+        }
+    }
 </script>
 
 </body>

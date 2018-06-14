@@ -1,6 +1,6 @@
 ext {
     servletVersion = '3.1.0'
-    springContextVserion = '4.3.2.RELEASE'
+    springContextVersion = '4.3.2.RELEASE'
     commonslang = '3.4'
     jacksonCore = '2.9.5'
     jacksonAnnotation = '2.9.0'

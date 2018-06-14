@@ -31,4 +31,5 @@ public interface UserMapper {
     })*/
     List<UserDTO> queryUsers();
     List<UserDTO> queryUsersByCondition(UserQueryDTO queryDTO);
+    void deleteUser(Long id);
 }

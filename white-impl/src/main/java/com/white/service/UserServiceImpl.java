@@ -32,7 +32,7 @@ public class UserServiceImpl extends AbstractServiceImpl implements UserService{
         User user = new User();
         BeanUtils.copyProperties(userDTO,user);
         userRepository.save(user);
-        throw new RuntimeException("测试事务");
+//        throw new RuntimeException("测试事务");
     }
 
     @Override
@@ -49,6 +49,11 @@ public class UserServiceImpl extends AbstractServiceImpl implements UserService{
             }
         });
         return new PaginationResultDTO<>(op,list);
+    }
+
+    @Override
+    public void deleteUser(Long id) {
+        userMapper.deleteUser(id);
     }
 
 }

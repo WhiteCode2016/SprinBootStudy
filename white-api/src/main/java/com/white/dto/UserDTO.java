@@ -1,5 +1,7 @@
 package com.white.dto;
 
+import com.white.enums.CommonEnums;
+
 import java.util.Date;
 
 /**
@@ -18,6 +20,7 @@ public class UserDTO {
     private String email;
     private String address;
     private String phone;
+    private CommonEnums.IF locked;
 
     public Long getUserId() {
         return userId;
@@ -89,5 +92,13 @@ public class UserDTO {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public CommonEnums.IF getLocked() {
+        return locked;
+    }
+
+    public void setLocked(CommonEnums.IF locked) {
+        this.locked = locked;
     }
 }

@@ -19,7 +19,7 @@ import java.util.Date;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class WhiteImplApplicationTests {
+public class WhiteImplApplicationTest {
 
     @Resource
     UserService userService;

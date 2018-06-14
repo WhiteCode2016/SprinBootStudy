@@ -1,5 +1,6 @@
 package com.white.service;
 
+import com.white.bean.ResultDTO;
 import com.white.bean.pagination.OrderablePaginationDTO;
 import com.white.bean.pagination.PaginationResultDTO;
 import com.white.dto.UserDTO;
@@ -18,4 +19,5 @@ public interface UserService {
 
     List<UserDTO> queryUsers(UserQueryDTO queryDTO);
     PaginationResultDTO<UserDTO> queryUsersByCondition(UserQueryDTO queryDTO, OrderablePaginationDTO op);
+    void deleteUser(Long id);
 }
