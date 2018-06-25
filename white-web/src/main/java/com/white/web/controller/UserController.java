@@ -1,34 +1,23 @@
 package com.white.web.controller;
 
-import com.github.pagehelper.ISelect;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-import com.sun.javafx.binding.StringFormatter;
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.white.bean.LabelValueBean;
 import com.white.bean.ResultDTO;
 import com.white.bean.pagination.DataTableDTO;
-import com.white.bean.pagination.OrderDTO;
 import com.white.bean.pagination.OrderablePaginationDTO;
 import com.white.bean.pagination.PaginationResultDTO;
-import com.white.domain.mapper.UserMapper;
 import com.white.dto.UserDTO;
 import com.white.dto.UserQueryDTO;
-import com.white.entity.User;
 import com.white.enums.CommonEnums;
 import com.white.service.UserService;
 import com.white.util.EnumUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -43,7 +32,8 @@ public class UserController extends BaseController {
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
     private static final String USER_QUERY = "admin/user/userQuery";
 
-    @Resource
+//    @Resource
+    @Reference
     UserService userService;
 
     /*@ResponseBody

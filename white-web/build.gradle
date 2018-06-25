@@ -9,7 +9,7 @@ ext {
 dependencies {
     compile project(':white-common')
     compile project(':white-api')
-    compile project(':white-impl')
+//    compile project(':white-impl')
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-devtools")
     // Swagger2 RESTFUL API文档
@@ -17,4 +17,6 @@ dependencies {
     compile("io.springfox:springfox-swagger-ui:$swagger2Version")
     compile("org.springframework.boot:spring-boot-starter-thymeleaf")
     compile("nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:$thymeleafDialectVersion")
+    compile("com.alibaba.spring.boot:dubbo-spring-boot-starter:2.0.0")
+    compile("com.101tec:zkclient:0.2")
 }

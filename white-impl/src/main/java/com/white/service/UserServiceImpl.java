@@ -9,6 +9,7 @@ import com.white.dto.UserDTO;
 import com.white.dto.UserQueryDTO;
 import com.white.entity.User;
 import org.springframework.beans.BeanUtils;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
@@ -19,7 +20,9 @@ import java.util.List;
  * @author: White
  * @date: 2018/6/4
  */
-@Service
+//@Service
+    @Component
+@com.alibaba.dubbo.config.annotation.Service(interfaceClass = UserService.class)
 public class UserServiceImpl extends AbstractServiceImpl implements UserService{
     @Resource
     UserRepository userRepository;
