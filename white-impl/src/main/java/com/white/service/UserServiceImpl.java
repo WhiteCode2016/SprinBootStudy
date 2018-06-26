@@ -1,5 +1,6 @@
 package com.white.service;
 
+import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.ISelect;
 import com.white.bean.pagination.OrderablePaginationDTO;
 import com.white.bean.pagination.PaginationResultDTO;
@@ -10,25 +11,23 @@ import com.white.dto.UserQueryDTO;
 import com.white.entity.User;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * All rights Reserved, Designed by xxxx
+ * UserService 服务
  *
  * @author: White
  * @date: 2018/6/4
  */
-//@Service
-    @Component
-@com.alibaba.dubbo.config.annotation.Service(interfaceClass = UserService.class)
+@Service(interfaceClass = UserService.class)
+@Component
 public class UserServiceImpl extends AbstractServiceImpl implements UserService{
     @Resource
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Resource
-    UserMapper userMapper;
+    private UserMapper userMapper;
 
     @Override
     public void saveUser(UserDTO userDTO) {

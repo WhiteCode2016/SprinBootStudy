@@ -33,8 +33,8 @@ public class UserController extends BaseController {
     private static final String USER_QUERY = "admin/user/userQuery";
 
 //    @Resource
-    @Reference
-    UserService userService;
+    @Reference(check = false)
+    private UserService userService;
 
     /*@ResponseBody
     @RequestMapping("/query")
