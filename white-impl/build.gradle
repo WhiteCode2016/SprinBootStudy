@@ -18,5 +18,7 @@ dependencies {
     compile("com.github.pagehelper:pagehelper-spring-boot-starter:$pageHelperVersion")
 //    compile("com.alibaba.spring.boot:dubbo-spring-boot-starter:$dubboVersion")
 //    compile("com.alibaba:druid:$driudVersion")
+    compile("com.alibaba.spring.boot:dubbo-spring-boot-starter:2.0.0")
+    compile("com.101tec:zkclient:0.2")
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
