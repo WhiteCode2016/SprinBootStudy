@@ -13,7 +13,7 @@ import java.io.Serializable;
 public class UserQueryDTO implements Serializable {
     private String userCode;
     private String userName;
-    private String locked;
+    private CommonEnums.IF locked;
 
     public String getUserCode() {
         return userCode;
@@ -31,11 +31,11 @@ public class UserQueryDTO implements Serializable {
         this.userName = userName;
     }
 
-    public String getLocked() {
+    public CommonEnums.IF getLocked() {
         return locked;
     }
 
-    public void setLocked(String locked) {
+    public void setLocked(CommonEnums.IF locked) {
         this.locked = locked;
     }
 }

@@ -28,17 +28,14 @@ public class RedisConfig extends CachingConfigurerSupport {
     //自定义Key生成策略（类名+方法名+参数）
     @Override
     public KeyGenerator keyGenerator() {
-        return new KeyGenerator() {
-            @Override
-            public Object generate(Object target, Method method, Object... params) {
-                StringBuilder builder = new StringBuilder();
-                builder.append(target.getClass().getName());
-                builder.append(method.getName());
-                for (Object obj : params) {
-                    builder.append(obj.toString());
-                }
-                return builder.toString();
+        return (target, method, params) -> {
+            StringBuilder builder = new StringBuilder();
+            builder.append(target.getClass().getName());
+            builder.append(method.getName());
+            for (Object obj : params) {
+                builder.append(obj.toString());
             }
+            return builder.toString();
         };
     }
 

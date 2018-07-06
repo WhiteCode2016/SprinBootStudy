@@ -2,6 +2,7 @@ package com.white;
 
 import com.white.dto.UserDTO;
 import com.white.dto.UserQueryDTO;
+import com.white.enums.CommonEnums;
 import com.white.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,11 +31,15 @@ public class WhiteImplApplicationTest {
     @Test
 //    @Transactional
     public void userServiceTest() {
-        UserDTO user = new UserDTO();
+       /* UserDTO user = new UserDTO();
         user.setUserCode("USER_TEST");
         user.setUserNameCn("王二小");
         user.setBirth(new Date());
-        userService.saveUser(user);
+        userService.saveUser(user);*/
+        UserQueryDTO userQueryDTO = new UserQueryDTO();
+        userQueryDTO.setUserName("王二小");
+        userQueryDTO.setLocked(CommonEnums.IF.Y);
+        userService.queryUsers(userQueryDTO);
     }
 
     @Autowired
