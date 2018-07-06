@@ -1,10 +1,13 @@
 package com.white;
 
 import com.white.dto.UserDTO;
+import com.white.dto.UserQueryDTO;
 import com.white.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,4 +36,14 @@ public class WhiteImplApplicationTest {
         user.setBirth(new Date());
         userService.saveUser(user);
     }
+
+    @Autowired
+    private RedisTemplate redisTemplate;
+
+    @Test
+    public void jedisTest() {
+        redisTemplate.opsForValue().set("test","123");
+        System.out.println(redisTemplate.opsForValue().get("test"));
+    }
+
 }

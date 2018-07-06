@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.white.domain.mapper.UserMapper">
+
+    <!-- 结果集 -->
     <resultMap id="userResultMap" type="com.white.dto.UserDTO">
         <result column="USER_ID" property="userId"/>
         <result column="USER_CODE" property="userCode"/>
@@ -20,17 +22,18 @@
 
     <!-- 按条件查询用户 -->
     <select id="queryUsersByCondition" resultMap="userResultMap" parameterType="com.white.dto.UserQueryDTO">
-        SELECT * FROM T_USER WHERE 1=1
-        <if test="userCode != null and userCode != ''">
-            AND USER_CODE = #{userCode}
-        </if>
-        <if test="userName != null and userName != ''">
-            <!--AND su.username like CONCAT('%', #{username}, '%')-->
-            AND USER_NAME_CN = #{userName}
-        </if>
-        <if test="locked != null and locked != ''">
-            AND locked = #{locked}
-        </if>
+        SELECT * FROM T_USER
+        <where>
+            <if test="userCode != null and userCode != ''">
+                AND USER_CODE = #{userCode}
+            </if>
+            <if test="userName != null and userName != ''">
+                AND USER_NAME_CN like CONCAT('%', #{username}, '%')
+            </if>
+            <if test="locked != null and locked != ''">
+                AND locked = #{locked}
+            </if>
+        </where>
     </select>
 
     <!-- 删除用户 -->
